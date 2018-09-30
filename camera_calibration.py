@@ -49,8 +49,8 @@ for idx, fname in enumerate(images):
     cv2.imshow('camera_chess_undist/' + str(idx+1)+'.jpg', dst)
     cv2.waitKey(500)
 
-    # Save the camera calibration result for later use (we won't worry about rvecs / tvecs)
-    dist_pickle = {}
-    dist_pickle["mtx"] = mtx
-    dist_pickle["dist"] = dist
-    pickle.dump( dist_pickle, open( "camera_cal/dist_pickle.p", "wb" ) )
+# Save the camera calibration result for later use (we won't worry about rvecs / tvecs)
+dist_pickle = {}
+dist_pickle["mtx"] = mtx
+dist_pickle["dist"] = dist
+pickle.dump( dist_pickle, open( "camera_cal/dist_pickle.p", "wb" ) )
