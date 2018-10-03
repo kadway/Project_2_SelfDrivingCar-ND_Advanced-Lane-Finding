@@ -1,9 +1,20 @@
 ## Advanced Lane Finding
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
+[//]: # (Image References)
+
+[image1]: ./camera_cal/calibration1.jpg "Original chessboard image"
+[image2]: ./camera_chess_undist/chess_undist_calibration1.jpg "Undistorted chessboard image"
+[image3]: ./test_images/straight_lines1.jpg "Test image"
+[image4]: ./output_images/undistorted/straight_lines1.jpg "Undistorted test image"
+[image5]: ./output_images/color_gradient_transformed/straight_lines1_combined_binary.jpg "Color and gradient transformed image"
+[image6]: ./output_images/warped/_original_straight_lines1.jpg "Warped image test"
+[image7]: ./output_images/fitted_poly/straight_lines1.jpg "Fitted poly"
+[image8]: ./output_images/out_image/straight_lines1.jpg "Radious"
+[video1]: ./output_videos/project_video.mp4 "Project video"
 
 The Project
----markdown in github
+---
 
 The goals / steps of this project are the following:
 
@@ -30,19 +41,19 @@ I start by preparing "object points", which will be the (x, y, z) coordinates of
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
-"Original Chessboard"
-![Original Chessboard](/camera_cal/calibration1.jpg) 
+Original Chessboard
+![alt text][image1]
 
 "Undistorted Chessboard"
-![Undistorted Chessboard](/camera_chess_undist/chess_undist_calibration1.jpg) 
+![alt text][image2]
 
 ### Pipeline (single images)
 
-#### 1. Provide an example of a distortion-corrected image.
+#### 1. Example of a distortion-corrected image.
 
 Here is an example of the `straight_lines1.jpg` original test image.
 
-![Original](/test_images/straight_lines1.jpg) 
+![alt text][image3]
 
 The undistortion of an image is performed by the `undistort(img, img_path=0)` function in the `Advanced_lane_finding.ipynb` notebook.
 Firstly the camera calibration parameters are loaded and then feed in to the openCV function `cv2.undistort(img, mtx, dist, None, mtx)` which returns the undistorted image.
@@ -50,9 +61,9 @@ The `img_path` is the image path and is only passed on to the function for the p
 
 After the distortion correction, the test image looks like this:
 
-![Undistorted](/output_images/undistorted/straight_lines1.jpg) 
+![alt text][image4]
 
-#### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+#### 2. Color transforms and gradients to create a thresholded binary image.
 I used a combination of color and gradient thresholds to generate a binary image.
 The thresholding steps are performed in function `transform(image, img_path=0)` in `Advanced_lane_finding.ipynb`.
 
@@ -72,11 +83,12 @@ The combined binary image is performed by combining all the binary images in the
 
 Here's an example of my output for this step using the `straight_lines1.jpg` test image.
 
-![ColorGradientTransform](/output_images/color_gradient_transformed/straight_lines1_combined_binary.jpg)
+![alt text][image5]
 
-#### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+#### 3. Perspective transform.
 
-The code for my perspective transform includes a function called `warper()`,  in the 4th code cell of the IPython notebook `Advanced_lane_finding.ipynb`.  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function called `warper()`,  in the 4th code cell of the IPython notebook `Advanced_lane_finding.ipynb`.  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points. 
+I chose to hardcode the source and destination points, according to the code provided in the writeup_template, in the following manner:
 
 ```python
 src = np.float32(
@@ -102,4 +114,36 @@ This resulted in the following source and destination points:
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![PerpectiveTransformOriginal](/output_images/warped/_original_straight_lines1.jpg)
+![alt text][image6]
+
+
+#### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+
+Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+
+![alt text][image7]
+
+#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+
+I did this in lines # through # in my code in `my_other_file.py`
+
+#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+
+I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+
+![alt text][image8]
+
+---
+
+### Pipeline (video)
+
+Here's a [link to my video result](./project_video.mp4)
+
+---
+
+### Discussion
+
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+
+Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+
