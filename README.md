@@ -167,7 +167,7 @@ The radius and offset to lane center are then also drawn onto the original image
 
 ### Pipeline (video)
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./output_videos/project_video.mp4)
 
 ---
 
